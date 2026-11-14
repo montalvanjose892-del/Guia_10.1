@@ -1,0 +1,19 @@
+<div class="profile">
+  <h1 class="title">@<%= @user.username %></h1>
+  <p class="center muted"><%= pluralize(@posts.size, "publicación", "publicaciones") %></p>
+
+  <% if @user == current_user %>
+    <p class="center">
+      <%= link_to "Nuevo post", new_post_path, class: "btn btn-primary" %>
+      <%= link_to "Editar mi cuenta", edit_user_registration_path, class: "btn" %>
+    </p>
+  <% end %>
+
+  <div class="grid">
+    <% @posts.each do |post| %>
+      <%= link_to post do %>
+        <%= image_tag post.image %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
