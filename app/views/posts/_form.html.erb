@@ -1,0 +1,22 @@
+<%= form_with model: post, class: "form" do |f| %>
+  <%= render "shared/errors", record: post %>
+
+  <div class="field">
+    <%= f.label :image, "Imagen" %>
+    <% if post.persisted? && post.image.attached? && post.image.blob.persisted? %>
+      <%= image_tag post.image, class: "preview" %>
+      <p class="muted">Sube otra solo si quieres reemplazarla.</p>
+    <% end %>
+    <%= f.file_field :image, accept: "image/png,image/jpeg,image/gif,image/webp" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, "Descripción" %>
+    <%= f.text_area :description, rows: 4 %>
+  </div>
+
+  <div class="center">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancelar", root_path, class: "btn" %>
+  </div>
+<% end %>

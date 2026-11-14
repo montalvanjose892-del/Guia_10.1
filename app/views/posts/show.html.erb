@@ -1,0 +1,23 @@
+<div class="feed">
+  <article class="card">
+    <div class="card-header">
+      <%= link_to "@#{@post.user.username}", profile_path(@post.user), class: "author" %>
+      <span class="muted">hace <%= time_ago_in_words(@post.created_at) %></span>
+    </div>
+
+    <%= image_tag @post.image, class: "card-image" %>
+
+    <div class="card-body">
+      <p><strong><%= @post.user.username %></strong> <%= @post.description %></p>
+
+      <div class="actions">
+        <%= link_to "Volver", root_path, class: "btn" %>
+        <% if @post.user == current_user %>
+          <%= link_to "Editar", edit_post_path(@post), class: "btn" %>
+          <%= button_to "Eliminar", @post, method: :delete, class: "btn btn-danger",
+                        form: { data: { turbo_confirm: "¿Eliminar esta publicación?" } } %>
+        <% end %>
+      </div>
+    </div>
+  </article>
+</div>
